@@ -1,0 +1,432 @@
+
+#####insert the data in collections#########
+db.dd.insert({name:"aditi", id:20});
+WriteResult({ "nInserted" : 1 })
+> db.dd.find({name:"adita"}).pretty()
+{
+        "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"),
+        "name" : "adita",
+        "id" : 20
+}
+ show collections
+dd
+friends
+students
+> db.dd.find().forEach(printjson);
+{
+        "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"),
+        "name" : "adita",
+        "id" : 20
+}
+{
+        "_id" : ObjectId("5f3ed71aaf9c6f1e4fbe98e9"),
+        "name" : "vaishu",
+        "id" : 30
+}
+>
+
+################ we can add the multiple record in collections #################################
+
+*in that value forgot another value print use:-
+db.co_nm.find({"field_nm":{$ne:record}})
+
+*in greater value :-
+db.co_nm.find({"field_nm":{$gte:record}})
+
+*in less value :-
+db.col_nm.find({"field_nm":{$ne:record}})
+
+*update or modified record use:-
+systax:
+db.col_nm.update({"fieldnm":" old record"{$set:{name:new record}})
+ db.dd.update({"name":"adita"},{$set:{"name":"aditya"}});
+
+db.friends.find()
+{ "_id" : ObjectId("5f31fe397d6c76512a50caf1"), "name" : "ADITYA", "ADD" : "VAISHNAVI" }
+> db.dd.update({"name":"adita"},{$set:{"name":"aditya"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.dd.find()
+{ "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya", "id" : 20 }
+{ "_id" : ObjectId("5f3ed71aaf9c6f1e4fbe98e9"), "name" : "vaishu", "id" : 30 }
+> db.dd.insert({"name":"aditya",id:90})
+WriteResult({ "nInserted" : 1 })
+> db.dd.update({"name":"adita"},{$set:{"name":"aditya"}}{multi:false});
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:54
+> db.dd.update({"name":"adita"},{$set:{"name":"aditya"}},{multi:false});
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.dd.find()
+{ "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya", "id" : 20 }
+{ "_id" : ObjectId("5f3ed71aaf9c6f1e4fbe98e9"), "name" : "vaishu", "id" : 30 }
+{ "_id" : ObjectId("5f3ede69af9c6f1e4fbe98ea"), "name" : "aditya", "id" : 90 }
+> db.dd.update({"name":"adita"},{$set:{"name":"aditya"}},{multi:true});
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.dd.find()
+{ "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya", "id" : 20 }
+{ "_id" : ObjectId("5f3ed71aaf9c6f1e4fbe98e9"), "name" : "vaishu", "id" : 30 }
+{ "_id" : ObjectId("5f3ede69af9c6f1e4fbe98ea"), "name" : "aditya", "id" : 90 }
+> db.dd.update({"name":"adita","id":20},{$set:{"name":"adityagangurde","id":100}},{multi:true});
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.dd.find()
+{ "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya", "id" : 20 }
+{ "_id" : ObjectId("5f3ed71aaf9c6f1e4fbe98e9"), "name" : "vaishu", "id" : 30 }
+{ "_id" : ObjectId("5f3ede69af9c6f1e4fbe98ea"), "name" : "aditya", "id" : 90 }
+> db.dd.update({"name":"adita","id":20},{$set:{"name":"adityagangurde","id":100}},{multi:True});
+uncaught exception: ReferenceError: True is not defined :
+@(shell):1:82
+> db.dd.save({"_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.dd.find()
+{ "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya" }
+{ "_id" : ObjectId("5f3ed71aaf9c6f1e4fbe98e9"), "name" : "vaishu", "id" : 30 }
+{ "_id" : ObjectId("5f3ede69af9c6f1e4fbe98ea"), "name" : "aditya", "id" : 90 }
+> db.students.remove({"name":"aditya"})
+WriteResult({ "nRemoved" : 0 })
+> db.students.find().forEach(printjson);
+> db.students.find()
+> db.dd.remove({"id":30"})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:24
+> db.dd.remove({"id":30})
+WriteResult({ "nRemoved" : 1 })
+> db.dd.find()
+{ "_id" : ObjectId("5f3ed69baf9c6f1e4fbe98e8"), "name" : "aditya" }
+{ "_id" : ObjectId("5f3ede69af9c6f1e4fbe98ea"), "name" : "aditya", "id" : 90 }
+>
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\comparision oprator\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ db.personal.find({age:{$eq:21}})
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+> db.personal.find({age:41})
+{ "_id" : ObjectId("5f45847a00be2f9a386d6b05"), "name" : "radha", "age" : 41, "gender" : "female" }
+{ "_id" : ObjectId("5f45848400be2f9a386d6b06"), "name" : "radhika", "age" : 41, "gender" : "female" }
+>
+use update_db
+switched to db update_db
+> db.update_db.save ( { name: 'Aparajita', role: 'Computer Engineer', work: 'banking'})
+WriteResult({ "nInserted" : 1 })
+> db.update_db.find()
+{ "_id" : ObjectId("5f4576c200be2f9a386d6b02"), "name" : "Aparajita", "role" : "Computer Engineer", "work" : "banking" }
+> db.update_db.find().pretty()
+{
+        "_id" : ObjectId("5f4576c200be2f9a386d6b02"),
+        "name" : "Aparajita",
+        "role" : "Computer Engineer",
+        "work" : "banking"
+}
+> db.update_db.save ( { name: 'ram', role: 'electronics engg', work: 'emp'})
+WriteResult({ "nInserted" : 1 })
+> db.update_db.find().pretty()
+{
+        "_id" : ObjectId("5f4576c200be2f9a386d6b02"),
+        "name" : "Aparajita",
+        "role" : "Computer Engineer",
+        "work" : "banking"
+}
+{
+        "_id" : ObjectId("5f45772800be2f9a386d6b03"),
+        "name" : "ram",
+        "role" : "electronics engg",
+        "work" : "emp"
+}
+> db.personal.insert({name:"ram", age:21, gender:"male"})
+WriteResult({ "nInserted" : 1 })
+> db.personal.insert({name:"radha", age:41, gender:"female"})
+WriteResult({ "nInserted" : 1 })
+> db.personal.insert({name:"radhika", age:41, gender:"female"})
+WriteResult({ "nInserted" : 1 })
+> >db.personal.find( {"age": { $not: {$lt : 12}}}).pretty();
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> >db.personal.find( {"age": { $not: {$lt : 21}}}).pretty();
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> db.personal.find({age:{$eq:21}})
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+> db.personal.find({age:21})
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+> db.personal.find({age:41})
+{ "_id" : ObjectId("5f45847a00be2f9a386d6b05"), "name" : "radha", "age" : 41, "gender" : "female" }
+{ "_id" : ObjectId("5f45848400be2f9a386d6b06"), "name" : "radhika", "age" : 41, "gender" : "female" }
+> db.personal.find({age:{$gt:41}})
+> db.personal.find({age:{$gt:21}})
+{ "_id" : ObjectId("5f45847a00be2f9a386d6b05"), "name" : "radha", "age" : 41, "gender" : "female" }
+{ "_id" : ObjectId("5f45848400be2f9a386d6b06"), "name" : "radhika", "age" : 41, "gender" : "female" }
+> db.personal.insert({name:"seema", age:32, gender:"female"})
+WriteResult({ "nInserted" : 1 })
+> db.personal.insert({name:"sagar", age:33, gender:"male"})
+WriteResult({ "nInserted" : 1 })
+> db.personal.insert({name:"aditi", age:22, gender:"female"})
+WriteResult({ "nInserted" : 1 })
+> db.personal.find().pretty()
+{
+        "_id" : ObjectId("5f45846100be2f9a386d6b04"),
+        "name" : "ram",
+        "age" : 21,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f45847a00be2f9a386d6b05"),
+        "name" : "radha",
+        "age" : 41,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f45848400be2f9a386d6b06"),
+        "name" : "radhika",
+        "age" : 41,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589ab00be2f9a386d6b07"),
+        "name" : "seema",
+        "age" : 32,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589b700be2f9a386d6b08"),
+        "name" : "sagar",
+        "age" : 33,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f4589da00be2f9a386d6b09"),
+        "name" : "aditi",
+        "age" : 22,
+        "gender" : "female"
+}
+> db.personal.find({age:"aditi"})
+> db.personal.find({name:"aditi"})
+{ "_id" : ObjectId("5f4589da00be2f9a386d6b09"), "name" : "aditi", "age" : 22, "gender" : "female" }
+> db.personal.find({age:{$lt:22}})
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+> b.inventory.update( { "age": { $gt: 30 } }, { $set: { age: 35 } } )
+uncaught exception: ReferenceError: b is not defined :
+@(shell):1:1
+> db.personal.update( { "age": { $gt: 30 } }, { $set: { age: 35 } } )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.personal.find().pretty();
+{
+        "_id" : ObjectId("5f45846100be2f9a386d6b04"),
+        "name" : "ram",
+        "age" : 21,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f45847a00be2f9a386d6b05"),
+        "name" : "radha",
+        "age" : 35,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f45848400be2f9a386d6b06"),
+        "name" : "radhika",
+        "age" : 41,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589ab00be2f9a386d6b07"),
+        "name" : "seema",
+        "age" : 32,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589b700be2f9a386d6b08"),
+        "name" : "sagar",
+        "age" : 33,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f4589da00be2f9a386d6b09"),
+        "name" : "aditi",
+        "age" : 22,
+        "gender" : "female"
+}
+> db.personal.find({age:{$in:[32,44]}})
+{ "_id" : ObjectId("5f4589ab00be2f9a386d6b07"), "name" : "seema", "age" : 32, "gender" : "female" }
+> db.personal.find({age:{$in:[32,41]}})
+{ "_id" : ObjectId("5f45848400be2f9a386d6b06"), "name" : "radhika", "age" : 41, "gender" : "female" }
+{ "_id" : ObjectId("5f4589ab00be2f9a386d6b07"), "name" : "seema", "age" : 32, "gender" : "female" }
+> db.personal.find({age:{$or:[32,41]}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown operator: $or",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.personal.find({age:{$lt:30}})
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+{ "_id" : ObjectId("5f4589da00be2f9a386d6b09"), "name" : "aditi", "age" : 22, "gender" : "female" }
+> db.personal.find({age:{$lte:33}})
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+{ "_id" : ObjectId("5f4589ab00be2f9a386d6b07"), "name" : "seema", "age" : 32, "gender" : "female" }
+{ "_id" : ObjectId("5f4589b700be2f9a386d6b08"), "name" : "sagar", "age" : 33, "gender" : "male" }
+{ "_id" : ObjectId("5f4589da00be2f9a386d6b09"), "name" : "aditi", "age" : 22, "gender" : "female" }
+> db.personal.find({age:{$lte:33}}).pretty()
+{
+        "_id" : ObjectId("5f45846100be2f9a386d6b04"),
+        "name" : "ram",
+        "age" : 21,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f4589ab00be2f9a386d6b07"),
+        "name" : "seema",
+        "age" : 32,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589b700be2f9a386d6b08"),
+        "name" : "sagar",
+        "age" : 33,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f4589da00be2f9a386d6b09"),
+        "name" : "aditi",
+        "age" : 22,
+        "gender" : "female"
+}
+> db.personal.find({age:{$ne:33}}).pretty()
+{
+        "_id" : ObjectId("5f45846100be2f9a386d6b04"),
+        "name" : "ram",
+        "age" : 21,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f45847a00be2f9a386d6b05"),
+        "name" : "radha",
+        "age" : 35,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f45848400be2f9a386d6b06"),
+        "name" : "radhika",
+        "age" : 41,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589ab00be2f9a386d6b07"),
+        "name" : "seema",
+        "age" : 32,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589da00be2f9a386d6b09"),
+        "name" : "aditi",
+        "age" : 22,
+        "gender" : "female"
+}
+> db.personal.find({age:{$ne:[33,21,22,41]}}).pretty()
+{
+        "_id" : ObjectId("5f45846100be2f9a386d6b04"),
+        "name" : "ram",
+        "age" : 21,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f45847a00be2f9a386d6b05"),
+        "name" : "radha",
+        "age" : 35,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f45848400be2f9a386d6b06"),
+        "name" : "radhika",
+        "age" : 41,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589ab00be2f9a386d6b07"),
+        "name" : "seema",
+        "age" : 32,
+        "gender" : "female"
+}
+{
+        "_id" : ObjectId("5f4589b700be2f9a386d6b08"),
+        "name" : "sagar",
+        "age" : 33,
+        "gender" : "male"
+}
+{
+        "_id" : ObjectId("5f4589da00be2f9a386d6b09"),
+        "name" : "aditi",
+        "age" : 22,
+        "gender" : "female"
+}
+> db.personal.find({age:{$ne:33},{$ne:21},{$ne:22},{$ne:41}}).pretty()
+uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:31
+> db.personal.find({age:{$ne:33},{$ne:21},{$ne:22},{$ne:41}}).pretty()
+uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:31
+> db.personal.find( { $and: [ { age: { $ne: 22 } }, { age: { $exists: true } } ] } )
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+{ "_id" : ObjectId("5f45847a00be2f9a386d6b05"), "name" : "radha", "age" : 35, "gender" : "female" }
+{ "_id" : ObjectId("5f45848400be2f9a386d6b06"), "name" : "radhika", "age" : 41, "gender" : "female" }
+{ "_id" : ObjectId("5f4589ab00be2f9a386d6b07"), "name" : "seema", "age" : 32, "gender" : "female" }
+{ "_id" : ObjectId("5f4589b700be2f9a386d6b08"), "name" : "sagar", "age" : 33, "gender" : "male" }
+> db.personal.find( { $and: [ { age: { $ne: 41 } }, { age: { $exists: true } } ] } )
+{ "_id" : ObjectId("5f45846100be2f9a386d6b04"), "name" : "ram", "age" : 21, "gender" : "male" }
+{ "_id" : ObjectId("5f45847a00be2f9a386d6b05"), "name" : "radha", "age" : 35, "gender" : "female" }
+{ "_id" : ObjectId("5f4589ab00be2f9a386d6b07"), "name" : "seema", "age" : 32, "gender" : "female" }
+{ "_id" : ObjectId("5f4589b700be2f9a386d6b08"), "name" : "sagar", "age" : 33, "gender" : "male" }
+{ "_id" : ObjectId("5f4589da00be2f9a386d6b09"), "name" : "aditi", "age" : 22, "gender" : "female" }
+> db.personal.find( { $and: [ { age: { $eq: 41 } }, { age: { $exists: true } } ] } )
+{ "_id" : ObjectId("5f45848400be2f9a386d6b06"), "name" : "radhika", "age" : 41, "gender" : "female" }
+> db.personal.find( { $and: [ { age: { $eq: 41 } }, { age: { $exists: true } ,[age: {$ne:22}},{age: {$exits:flase}}] ] } )
+uncaught exception: SyntaxError: missing ] in computed property name :
+@(shell):1:80
+> db.personal.find({age:{$ne:33}}).pretty()                                                                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

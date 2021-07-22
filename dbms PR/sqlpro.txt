@@ -1,0 +1,304 @@
+create or replace Procedure display(ro in number)
+as
+s students.total_m%type;
+begin
+select total_m into s from st where rollno=ro;
+if (s<=1500 and s>=990) then
+update result set class='destinction' where rollno=ro;
+dbms_output.put_line(ro);
+dbms_output.put_line('distiction');
+elsif (s<=989 and s>=900) then
+update result set class='first class' where rollno=ro;
+dbms_output.put_line('first pass');
+ elsif (s<=899 and s>=825) then
+update result set class='second class' where rollno=ro;
+dbms_output.put_line('second pass');
+else
+update result set class='pass' where rollno=ro;
+end if;
+end;
+/
+
+create or replace Procedure display(ro in number)
+  2  as
+  3  s students.total_m%type;
+  4  begin
+  5  select total_m into s from st where rollno=ro;
+  6  if (s<=1500 and s>=990) then
+  7  update result set class='destinction' where rollno=ro;
+  8  dbms_output.put_line(ro);
+  9  dbms_output.put_line('distiction');
+ 10  elsif (s<=989 and s>=900) then
+ 11  update result set class='first class' where rollno=ro;
+ 12  dbms_output.put_line('first pass');
+ 13   elsif (s<=899 and s>=825) then
+ 14  update result set class='second class' where rollno=ro;
+ 15  dbms_output.put_line('second pass');
+ 16  else
+ 17  update result set class='pass' where rollno=ro;
+ 18  end if;
+ 19  end;
+ 20  /
+
+Procedure created.
+
+SQL> set serveroutput on;
+SQL> execute display(1);
+
+PL/SQL procedure successfully completed.
+
+SQL> select *from result;
+
+    ROLLNO NAME                 CLASS
+---------- -------------------- --------------------
+         1 vaishnavi            pass
+         2 sakshi               pass
+         3 sayali
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+from stu_mark where rollno=ro;
+if (s<=1500 and s>=990) then
+update result set class='destinction' where rollno=ro;
+dbms_output.put_line(ro);
+dbms_output.put_line('distiction');
+elsif (s<=989 and s>=900) then
+update result set class='first class' where rollno=ro;
+dbms_output.put_line('first pass');
+ elsif (s<=899 and s>=825) then
+update result set class='second class' where rollno=ro;
+dbms_output.put_line('second pass');
+else 
+update result set class='pass' where rollno=ro;
+end if;
+end;
+/
+
+declare
+create or replace Procedure display( r in number,n varchar(10),m number) 
+is
+s stu_mark.total_m%type;
+begin
+if (s<=1500 and s>=990) then
+class='destinction';
+elsif (s<=989 and s>=900) then
+class='first class' ;
+ elsif (s<=899 and s>=825) then
+class='second class';
+else (s<=700) then
+class='pass';
+end if;
+insert into stu_mark values(n,m);
+insert into result values(r,n,class);
+end;
+/
+ create table stu_mark(name varchar(20),total_m int);
+
+Table created.
+
+SQL> insert into stu_mark('vaishnavi',1008);
+insert into stu_mark('vaishnavi',1008)
+                     *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into stu_mark values('vaishnavi',1008);
+
+1 row created.
+
+SQL> insert into stu_mark values('sakshi',999);
+
+1 row created.
+
+SQL> insert into stu_mark values('sayali',899);
+
+1 row created.
+
+SQL> create table result(rollno int,name varchar(20),class varchar(20));
+
+Table created.
+
+SQL> insert into result values(1,'vaishnavi','');
+
+1 row created.
+
+SQL> insert into result values(2,'sakshi','');
+
+1 row created.
+
+SQL> insert into result values(3,'sayali','');
+
+1 row created.
+
+SQL> select *from stu_mark;
+
+NAME                    TOTAL_M
+-------------------- ----------
+vaishnavi                  1008
+sakshi                      999
+sayali                      899
+
+SQL> select *from result;
+
+    ROLLNO NAME                 CLASS
+---------- -------------------- --------------------
+         1 vaishnavi
+         2 sakshi
+         3 sayali
+
+DECLARE
+a number;
+b number;
+c number;
+PROCEDURE findMin(x IN number, y IN number, z OUT number) IS
+BEGIN
+IF x < y THEN
+z:= x;
+ELSE
+z:= y;
+END IF;
+END; 
+BEGIN
+a:= 23;
+b:= 45;
+findMin(a, b, c);
+dbms_output.put_line(' Minimum of (23, 45) : ' || c);
+END;
+/
+
+declare
+a number :=10;
+b number :=20;
+c number;
+begin 
+c :=a+b;
+dbms_output.put_line(c);
+end;
+/
+
+
+DECLARE
+c_id cus.id%type := 1;
+c_sal cus.sal%type;
+BEGIN
+SELECT sal 
+INTO c_sal
+FROM cus
+WHERE id = c_id;
+IF (c_sal <= 20000) THEN
+UPDATE cus 
+SET sal = sal + 1000
+WHERE id = c_id;
+dbms_output.put_line ('Salary updated');
+END IF;
+END;
+/
+
+
+DECLARE
+a number;
+PROCEDURE squareNum(x IN OUT number) IS
+BEGIN
+x := x * x;
+END; 
+BEGIN
+a:= 23;
+squareNum(a);
+dbms_output.put_line(' Square of (23): ' || a);
+END;
+/
+
+
+/////////////////////// cursor ///////////////////////////////////////////////////////////////////////////////////
+create table c(id int,name varchar(20),age int,addre varchar(20),sal int);
+
+Table created.
+
+SQL> insert into c values(1,'sakshi',17,kopargoan,9999);
+insert into c values(1,'sakshi',17,kopargoan,9999)
+                                   *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into c values(1,'sakshi',17,'kopargoan',9999);
+
+1 row created.
+
+SQL> insert into c values(2,'sayali',19,'kokam',9000);
+
+1 row created.
+
+SQL> insert into c values(3,'sarika',20,'pune',8000);
+
+1 row created.
+
+SQL> insert into c values(4,'sanket',20,'pune',4000);
+
+1 row created.
+
+SQL> select *from c;
+
+        ID NAME                        AGE ADDRE                       SAL
+---------- -------------------- ---------- -------------------- ----------
+         1 sakshi                       17 kopargoan                  9999
+         2 sayali                       19 kokam                      9000
+         3 sarika                       20 pune                       8000
+         4 sanket                       20 pune                       4000
+
+
+DECLARE
+  2  c_id c.id%type;
+  3  c_name c.name%type;
+  4  c_addr c.addre%type;
+  5  CURSOR c_customers is
+  6  SELECT id, name, addre FROM c;
+  7  BEGIN
+  8  OPEN c_customers;
+  9  LOOP
+ 10  FETCH c_customers into c_id, c_name, c_addr;
+ 11  EXIT WHEN c_customers%notfound;
+ 12  dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr);
+ 13  END LOOP;
+ 14  CLOSE c_customers;
+ 15  END;
+ 16  /
+1 sakshi kopargoan
+2 sayali kokam
+3 sarika pune
+4 sanket pune
+
+PL/SQL procedure successfully completed.
+
+declare 
+c_id exception ;
+BEGIN 
+If 11<16 then
+Raise c_id;
+End if;
+Exception
+When no_data_found then
+dbms_output.put_line('error rease');
+End;
+/
+
+
+
+
+
+
+
+
+
+

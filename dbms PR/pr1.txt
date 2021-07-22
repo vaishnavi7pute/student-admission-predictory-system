@@ -1,0 +1,513 @@
+create table Test(id integer, empname varchar(100),emp_addr varchar(100),emp_sal varchar(100));
+insert into Test(id,empname,emp_addr,emp_sal) values(1,'vaishnvi satpute','kopargoan',200000);
+insert into Test(id,empname,emp_addr,emp_sal) values(202,'sayali sat','mumbai',2800000);
+insert into Test(id,empname,emp_addr,emp_sal) values(301,'sakshi satpute','pune',1200000);
+insert into Test(id,empname,emp_addr,emp_sal) values(401,'gita gangurde','kopargoan',200000);
+insert into Test(id,empname,emp_addr,emp_sal) values(501,'sita satpute','kopargoan',200000);
+insert into Test(id,empname,emp_addr,emp_sal) values(601,'tejas borade','kopargoan',500000);
+
+
+create table ne1(id integer, empname varchar(100),emp_addr varchar(100),emp_sal varchar(100));
+insert into ne1(id,empname,emp_addr,emp_sal) values(7,'summrudhi limbore','kopargoan',200000);
+insert into ne1(id,empname,emp_addr,emp_sal) values(8,'dipak satp','mumbai',2800000);
+insert into ne1(id,empname,emp_addr,emp_sal) values(9,'aditya G','pune',1200000);
+insert into ne1(id,empname,emp_addr,emp_sal) values(10,'arati sidhya','kopargoan',200000);
+insert into ne1(id,empname,emp_addr,emp_sal) values(11,'vaishhh','kopargoan',200000);
+insert into new1(id,empname,emp_addr,emp_sal) values(12,'aradhya dhavane','kopargoan',500000);
+
+select * from new1;
+
+
+
+select *from Test where emp_sal>10000;
+select * from Test;
+select *from Test where emp_sal>10000;
+
+
+select id,empname from Test;
+alter table Test drop column id;
+
+
+drop table Test;
+create index i1 on Test(id,empname,emp_addr);
+show index from Test;
+
+                            ASSIGNMENT 3
+
+************************clausees*********************************************
+
+select id from new1 where emp_sal=60;  /////condition given purpose;
+
+select distinct(empname) from new1;  \\\\\\\\\\\\avoids the duplication of records
+
+update new1 set emp_sal=4500 where id=14;  ////////////set clause (use updation uepose)
+
+update new1 set empname='sagar' where id=9///////////update name;
+
+select *from new1 order by empname ; ///////////////order by clause
+
+select *from new1 where emp_sal between 100 and 200000 ///////////between predict (use to print multiple values between range)
+
+select *from new1 where emp_sal in(200000,500000); ///////////values matches any list of record that they check; (in predict)
+
+select *from new1 where emp_sal not in(200000,500000)  //////////////not in predict
+
+
+select *from new1 where empname like 'adity G';/////////////like predict
+select *from new1 where empname like 'vaishhh';
+
+##########################AGGRIGATE FUNCTION###########################################################
+select *from new1 where emp_sal=(select min(emp_sal) from new1);    ///////////min function
+
+select *from new1 where emp_sal=(select max(emp_sal) from new1); ///////////////max function
+
+select count(empname) from new1 ///////////////////count()
+
+select round(emp_sal) from new1;  ////////////////////round()
+
+
+select empname from new1 union select empname from Test ////////// same cloumn from both table
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Pactical no=4#####################
+
+
+
+create table stu1(roll int,name varchar(90),address varchar(100),class varchar(100),fees int);
+insert into stu1(roll,name,address,class,fees) values(1,'vaishnavi','kopargoan','TE',50000);
+insert into stu1(roll,name,address,class,fees) values(2,'sakshi','sinner','SE',90000);
+insert into stu1(roll,name,address,class,fees) values(3,'sayali','nasik','FE',25000);
+insert into stu1(roll,name,address,class,fees) values(4,'sai','yeola','SE',50000);
+insert into stu1(roll,name,address,class,fees) values(5,'priya','pune','TE',15000);
+
+
+create table stu2(roll int,s_name varchar(90),address varchar(100),fees int);
+insert into stu1(roll,name,address,fees) values(1,'vaishnavi','kopargoan',50000);
+insert into stu1(roll,name,address,fees) values(2,'sakshi','sinner',90000);
+
+2nd table==
+create table product_deatail(product_id int,name varchar(90),quantity int,price int);
+insert into product_deatail(product_id,name,quantity,price) values(1,'PD',12,50000);
+insert into product_deatail(product_id,name,quantity,price) values(2,'Harddisk',14,90000);
+insert into product_deatail(product_id,name,quantity,price) values(3,'headphone',43,25000);
+insert into product_deatail(product_id,name,quantity,price) values(4,'dvd',46,50000);
+insert into product_deatail(product_id,name,quantity,price) values(5,'speaker',901,15000);
+insert into product_deatail(product_id,name,quantity,price) values(6,'headphone',43,15000);
+
+create table sale(sale_no int,product_id int,quantity int,cus_nm varchar(100),price int);
+insert into sale(sale_no,product_id,quantity,cus_nm,price) values(9001,1,23,'vaishnavi',50000);
+insert into sale(sale_no,product_id,quantity,cus_nm,price) values(9002,2,100,'sayali',90000);
+insert into sale(sale_no,product_id,quantity,cus_nm,price) values(9003,5,120,'tejas',90000);
+insert into sale(sale_no,product_id,quantity,cus_nm,price) values(9004,4,400,'seema',90000);
+insert into sale(sale_no,product_id,quantity,cus_nm,price) values(9005,3,51,'geeta',90000);
+
+
+select product_deatail.product_id,name,cus_nm,sale.quantity,product_deatail.price from product_deatail inner join sale on 
+product_deatail.product_id=sale.product_id;  /////////////////////inner join
+
+
+select product_deatail.product_id,name,sale.cus_nm from product_deatail right outer join sale on 
+product_deatail.product_id=sale.product_id; ////////////////////right outer same left also
+
+
+
+
+
+select a.roll,a.name,a.class,b.address from stu1 as a,stu2 as b where a.roll=b.roll;  ////////////join without join keyword (alising);;;
+
+select stu1.roll,name,s_name,stu2.fees from stu1 inner join stu2 on stu1.roll=tu2.roll;
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ SUNQUERIES $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+create table dept(dept_id int,dept_nm varchar(100));
+>insert dept(dept_id,dept_nm) values(11,"computer");
+>insert dept(dept_id,dept_nm) values(12,"ENTC");
+>insert dept(dept_id,dept_nm) values(13,"civil");
+>insert dept(dept_id,dept_nm) values(13,"macanical");
+>insert dept(dept_id,dept_nm) values(15,"IT");
+>select *from dept
+
+create table regiter(emp_id int,dept_id int);
+>insert regiter(emp_id,dept_id) values(1,11);
+>insert regiter(emp_id,dept_id) values(102,12);
+>insert regiter(emp_id,dept_id) values(301,13);
+>insert regiter(emp_id,dept_id) values(401,13);
+>insert regiter(emp_id,dept_id) values(501,15);
+
+select empname,dept_nm from employee e join regiter r on e.emp_id=r.emp_id join dept d on d.dept_id=r.dept_id;
+empname    dept_nm
+vaishnvi satpute    computer
+sakshi satpute    civil
+sakshi satpute    macanical
+gita gangurde    civil
+gita gangurde    macanical
+sita satpute    IT
+
+
+2>   JDoodle
+MySQL
+Welcome to JDoodle - online mysql Terminal, Starting mysql Terminal, Please wait...
+New MySQL session started...
+>create table customer(cname varchar(100),city varchar(100),phone int);
+insert customer values("vaishnavi","kopargoan",1234567);
+insert customer values("abc","kokmathan",987746);
+insert customer values("sakshi","pune",32648);
+insert customer values("sayali","mumbai",4567);
+>select *from customer
+cname    city    phone
+vaishnavi    kopargoan    1234567
+abc    kokmathan    987746
+sakshi    pune    32648
+sayali    mumbai    4567
+>create table loan(ino int,bname varchar(100),amt int);
+insert loan values(1,"cm",900);
+insert loan values(2,"IT",800);
+insert loan values(3,"ENTC",700);
+insert loan values(4,"civil",6500);
+>select *from loan
+ino    bname    amt
+1    cm    900
+2    IT    800
+3    ENTC    700
+4    civil    6500
+
+
+create table borr(cname varchar(100),ino int);
+insert borr values("vaishnavi",1);
+insert borr values("abc",2);
+insert borr values("sakshi",3);
+insert borr values("sayali",4);
+>create table depositor(cname varchar(100),accno int);
+>insert depositor values("vaishnavi",11);
+>insert depositor values("abc",12);
+>insert depositor values("sakshi",13);
+>insert depositor values("sayali",14);
+>select *from depositor
+cname    accno
+vaishnavi    11
+abc    12
+sakshi    13
+sayali    14
+>create table branch(bname varchar(100),bcity varchar(90));
+>insert branch values("cm","pune");
+>insert branch values("IT","usamanabad");
+>insert branch values("ENTC","hydrabadbad");
+>select *from branch
+bname    bcity
+cm    pune
+IT    usamanabad
+ENTC    hydrabadbad
+>create table account(bname varchar(100),accno int,bal int);
+>insert account values("cm",11,12000);
+>insert account values("cm",11,12000);
+>insert account values("ENTC",12,78999);
+>select *from account;
+bname    accno    bal
+cm    11    12000
+cm    11    12000
+ENTC    12    78999
+
+1> find the name customer whose city include"bad";;
+select cname from customer where city like '%bad%'; ////////////////////////////like clauses;
+
+2> find all customer who have an account but no amt in the bank
+update loan set amt=000 where ino=3;
+select *from loan;
+
+select cname from customer where cname in(select cname from borr where ino in(select ino from loan where amt=000)); /////////////////////////////  find customer who have acct but not loan in the bank
+
+3>find anerage account balance in branch
+
+select accno,avg(bal) from account group by accno;///////////////////avg balance;
+
+ /////////////////////////////////////////////////////////////////////////////	2ND UNIT/////////////////////////////////////////////////////////
+
+alter table Test add grade char(90); ///////////////////////////
+
+alter table Test add grade char(90);
+
+insert into Test(id,title,grade) values(3,"asd",1000);
+
+create unique index i1
+on sale(sale_no);             ///////////////////////////////////////unique index creatred 
+
+show index from sale; /////////////////////////////////////////////show index;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+create table supplier(sid integer,sname varchar(100),addr varchar(100));
+insert into supplier(id,sname,addr) values(1,'sakshi','kopargoan');
+insert into supplier(id,name,addr) values(2,'sayali','mumbai');
+insert into supplier(id,empname,emp_addr,emp_sal) values(3,'vaishnvi','pune');
+
+create table part(pid integer,pname varchar(100),color varchar(100));
+insert into part(pid,pname,color) values(12,'abx','green');
+insert into part(pid,name,color) values(22,'hh','pink');
+insert into part(pid,pname,color) values(11,'pendrive','red');
+
+create table cat(pid integer,pname varchar(100),color varchar(100));
+insert into cat(pid,pname,color) values(12,'abx','green');
+insert into cat(pid,name,color) values(22,'hh','pink');
+insert into cat(pid,pname,color) values(11,'pendrive','red');
+///////////////////////////////////////////////////a=5
+declare
+type nmarray is varray(5) of varchar2(20);         ////////////////arary
+type grade is varray(5) of integer;
+name nmarray;
+marks grade;
+total integer;
+begin
+name:= nmarray('teena','seema','leena''a','a');
+marks:= grade(12,13,14,90,90);
+total:= name.count;
+dbms_output.put_line('total'|| total || 'stu');
+for i in 1..total loop
+dbms_output.put_line('Student: ' || name(i) || '
+Marks: ' || marks(i));
+end loop;
+end;
+
+
+
+declare
+type namearray is varray(5) of varchar2(20); //////////////////////////////inc sal but error
+type salary is varray(5) of integer;
+empnm namearray;
+income salary;
+total integer;
+begin
+empnm:= namearray('teena','seema','leena','a','a');
+income:= salary(12,13,14,90,90);
+total:= income + 10;
+dbms_output.put_line('total: ' || income || 'stu: ');
+for i in 1..5 loop
+dbms_output.put_line('empnm: ' || empnm(i) || '
+salary: ' || income(i));
+end loop;
+end;
+
+declare
+    iid e1.id%type;
+    nm e1.name%type;
+    sa e1.sal%type;
+    cursor c1 is select * from e1 minus select * from e2;
+    begin
+    open c1;
+    loop
+    fetch c1 into iid,nm,sa;
+   exit when c1%notfound;
+   dbms_output.put_line(iid ||' '||nm||' '||sa);
+   insert into e2 values(iid,nm,sa);
+   end loop;
+   close c1;
+   end;
+   /
+DECLARE
+c_id cus.id%type:=1;
+c_name cus.name%type;
+c_sal cus.sal%type;
+BEGIN
+select id,name into c_id,c_name from cus;
+dbms_output.put_line('Customer ' ||c_name || ' from ' || 'customer id is' || c_id);
+END;
+/
+declare
+BEGIN 
+dbms_output.put_line( 10 + 5);
+dbms_output.put_line( 10 - 5);
+dbms_output.put_line( 10 * 5);
+dbms_output.put_line( 10 / 5);
+end;
+/
+
+assignment 5:===
+
+create table borrower(roll int,name varchar(90),DateofIssue date,nameofbook varchar(80),status varchar(90));
+
+Table created.
+
+SQL> insert into borrower values(1,'sayali','01-apr-2017','DBMS','s');
+
+1 row created.
+
+SQL> insert into borrower values(2,'seema','05-apr-2017','java','s');
+
+1 row created.
+
+SQL> insert into borrower values(3,'rama','12-apr-2017','python','s');
+
+1 row created.
+
+SQL> select *from borrower;
+
+Enter value for roll_number: 2
+old   2:     rno number(3):=&roll_number;
+new   2:     rno number(3):=2;
+Enter value for booknm: java
+old   3:     nm varchar(20):='&booknm';
+new   3:     nm varchar(20):='java';
+
+PL/SQL procedure successfully completed.
+select *from borrower;
+
+      ROLL
+----------
+NAME
+--------------------------------------------------------------------------------
+DATEOFISS
+---------
+NAMEOFBOOK
+--------------------------------------------------------------------------------
+STATUS
+--------------------------------------------------------------------------------
+         1
+sayali
+01-APR-17
+
+      ROLL
+----------
+NAME
+--------------------------------------------------------------------------------
+DATEOFISS
+---------
+NAMEOFBOOK
+--------------------------------------------------------------------------------
+STATUS
+--------------------------------------------------------------------------------
+DBMS
+s
+
+
+      ROLL
+----------
+NAME
+--------------------------------------------------------------------------------
+DATEOFISS
+---------
+NAMEOFBOOK
+--------------------------------------------------------------------------------
+STATUS
+--------------------------------------------------------------------------------
+         2
+seema
+05-APR-17
+
+      ROLL
+----------
+NAME
+--------------------------------------------------------------------------------
+DATEOFISS
+---------
+NAMEOFBOOK
+--------------------------------------------------------------------------------
+STATUS
+--------------------------------------------------------------------------------
+java
+R
+
+
+      ROLL
+----------
+NAME
+--------------------------------------------------------------------------------
+DATEOFISS
+---------
+NAMEOFBOOK
+--------------------------------------------------------------------------------
+STATUS
+--------------------------------------------------------------------------------
+         3
+rama
+12-APR-17
+
+      ROLL
+----------
+NAME
+--------------------------------------------------------------------------------
+DATEOFISS
+---------
+NAMEOFBOOK
+--------------------------------------------------------------------------------
+STATUS
+--------------------------------------------------------------------------------
+python
+s
+
+
+SQL> select *from fine;
+
+      ROLL SDATE            AMT
+---------- --------- ----------
+         2 01-AUG-20      60750
+
+ declare
+    rno number(3):=&roll_number;
+    nm varchar(20):='&booknm';
+    no_days number(7);
+    issuedate date;
+    fineamt number(5):=0;
+    begin
+    select DateofIssue into issuedate from borrower where roll=rno;
+    select sysdate - to_date(issuedate)days into no_days from dual;
+   if(no_days >=15 and no_days <=30) then
+   fineamt :=no_days * 5;
+   elsif no_days>30 then
+   fineamt :=no_days*50;
+   end if;
+   update borrower set status='R' where roll=rno;
+   if fineamt >=0 then
+   insert into fine values(rno,sysdate,fineamt);
+   end if;
+   exception
+   when no_data_found then
+   dbms_output.put_line('no match');
+   end;
+   /
+
+//////////////////////////////////////////////////////////////////////////  assignment 7:==  trigger//////////////////////
+
+create table s(erp_no int,name varchar(20),fees int);
+
+Table created.
+
+SQL> insert into s values(1,'vaishnavi',3000);
+
+1 row created.
+
+SQL> insert into s values(2,'vaishali',9000);
+
+1 row created.
+
+SQL> insert into s values(3,'vishakha',6000);
+
+1 row created.
+
+SQL> select *from s;
+
+    ERP_NO NAME                       FEES
+---------- -------------------- ----------
+         1 vaishnavi                  3000
+         2 vaishali                   9000
+         3 vishakha                   6000
+
+SQL> set serveroutput on;
+SQL> CREATE OR REPLACE TRIGGER ss
+  2  AFTER UPDATE ON s
+  3  FOR EACH ROW
+  4  WHEN (NEW.ERP_no > 0)
+  5  DECLARE
+  6  updated_fees number;
+  7  BEGIN
+  8  Updated_fees := :NEW.fees - :OLD.fees;
+  9  dbms_output.put_line('Old fees: ' || :OLD.fees);
+ 10  dbms_output.put_line('New fees: ' || :NEW.fees);
+ 11  dbms_output.put_line('fees updated in student: ' || updated_fees);
+ 12  END;
+ 13  /
+
+Trigger created.
+
+SQL> update s set fees = fees + 200 where erp_no=2;
+Old fees: 9000
+New fees: 9200
+fees updated in student: 200
+
+1 row updated.

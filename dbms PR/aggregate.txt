@@ -1,0 +1,57 @@
+use example
+switched to db example
+> db.createCollection("student");
+{ "ok" : 1 }
+> db.student.insert({name:"vaishnavi",age:20,addr:"kopargoan",sub:"math",marks:90});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name:"aditya",age:22,addr:"kopargoan",sub:"math",marks:93});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name:"sayali",age:19,addr:"pune",sub:"math",marks:94});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name:"sakshi",age:19,addr:"sinner",sub:"math",marks:80});
+WriteResult({ "nInserted" : 1 })
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("5f4ebea88fe67bf4997eb175"),
+        "name" : "vaishnavi",
+        "age" : 20,
+        "addr" : "kopargoan",
+        "sub" : "math",
+        "marks" : 90
+}
+{
+        "_id" : ObjectId("5f4ebef98fe67bf4997eb176"),
+        "name" : "aditya",
+        "age" : 22,
+        "addr" : "kopargoan",
+        "sub" : "math",
+        "marks" : 93
+}
+{
+        "_id" : ObjectId("5f4ebf198fe67bf4997eb177"),
+        "name" : "sayali",
+        "age" : 19,
+        "addr" : "pune",
+        "sub" : "math",
+        "marks" : 94
+}
+{
+        "_id" : ObjectId("5f4ebf328fe67bf4997eb178"),
+        "name" : "sakshi",
+        "age" : 19,
+        "addr" : "sinner",
+        "sub" : "math",
+        "marks" : 80
+}
+> db.student.aggregate([{$group:{_id:"$sub",marks:{$min:"$marks"}}}]);
+{ "_id" : "math", "marks" : 80 }
+> db.student.aggregate([{$group:{_id:"$sub",marks:{$max:"$marks"}}}]);
+{ "_id" : "math", "marks" : 94 }
+> db.student.aggregate([{$group:{_id:"$sub",marks:{$sum:"$marks"}}}]);
+{ "_id" : "math", "marks" : 357 }
+> db.student.aggregate([{$group:{_id:"$sub",marks:{$avg:"$marks"}}}]);
+{ "_id" : "math", "marks" : 89.25 }
+> db.student.aggregate([{$group:{_id:"$sub",marks:{$last:"$marks"}}}]);
+{ "_id" : "math", "marks" : 80 }
+> db.student.aggregate([{$group:{_id:"$sub",marks:{$first:"$marks"}}}]);
+{ "_id" : "math", "marks" : 90 }
