@@ -1,0 +1,2 @@
+# student-admission-predictory-system
+Students Admission Predictor System is a web based application system in which students can register their marks along with their personal information. This helps to predict their admissions in colleges. Administrator can add the college details and the batch details. Using this Application, the entrance seat allotment becomes easier and efficient. The main advantage of the project is the computerization of the entrance seat allotment process.(The  pro
